@@ -137,8 +137,6 @@ def main():
         lr_scheduler_type="cosine",
         warmup_ratio=0.03,
         report_to="none",
-
-        predict_with_generate=True,
         generation_max_length=256,
     )
 

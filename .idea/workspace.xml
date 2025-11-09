@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/training/train_lora.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="133" column="36" lean-forward="true" selection-start-line="133" selection-start-column="36" selection-end-line="133" selection-end-column="36" />
+            <state relative-caret-position="420">
+              <caret line="139" selection-start-line="139" selection-end-line="139" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -216,12 +216,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1762701950960</updated>
-      <workItem from="1762701953090" duration="14675000" />
+      <workItem from="1762701953090" duration="14800000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14675000" />
+    <option name="totallyTimeSpent" value="14800000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1360" height="738" extended-state="6" />
@@ -462,8 +462,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/training/train_lora.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="133" column="36" lean-forward="true" selection-start-line="133" selection-start-column="36" selection-end-line="133" selection-end-column="36" />
+        <state relative-caret-position="420">
+          <caret line="139" selection-start-line="139" selection-end-line="139" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
