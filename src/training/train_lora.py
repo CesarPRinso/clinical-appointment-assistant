@@ -150,7 +150,6 @@ def main():
         eval_dataset=eval_ds,
         data_collator=collator,
         peft_config=peft_cfg,
-        max_seq_length=1024,
         packing=False,
         args=args,
         compute_metrics=compute_metrics,
