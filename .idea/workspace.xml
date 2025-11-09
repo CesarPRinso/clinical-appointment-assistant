@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/training/train_lora.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="154" selection-start-line="154" selection-end-line="154" />
+            <state relative-caret-position="287">
+              <caret line="153" selection-start-line="153" selection-end-line="153" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -91,6 +91,7 @@
       <find>DataCollatorForCompletionOnlyLM</find>
       <find>TrainingArguments</find>
       <find>compute_metrics</find>
+      <find>sortish_sampler</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -215,12 +216,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1762701950960</updated>
-      <workItem from="1762701953090" duration="14099000" />
+      <workItem from="1762701953090" duration="14252000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14099000" />
+    <option name="totallyTimeSpent" value="14252000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1360" height="738" extended-state="6" />
@@ -461,8 +462,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/training/train_lora.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="154" selection-start-line="154" selection-end-line="154" />
+        <state relative-caret-position="287">
+          <caret line="153" selection-start-line="153" selection-end-line="153" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

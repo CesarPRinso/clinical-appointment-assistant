@@ -151,7 +151,6 @@ def main():
         data_collator=collator,
         peft_config=peft_cfg,
         args=args,
-        compute_metrics=compute_metrics,
     )
 
     trainer.train()
