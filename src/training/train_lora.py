@@ -150,7 +150,6 @@ def main():
         eval_dataset=eval_ds,
         data_collator=collator,
         peft_config=peft_cfg,
-        packing=False,
         args=args,
         compute_metrics=compute_metrics,
         callbacks=[EarlyStoppingCallback(early_stopping_patience=5)]
