@@ -137,7 +137,6 @@ def main():
         lr_scheduler_type="cosine",
         warmup_ratio=0.03,
         report_to="none",
-        generation_max_length=256,
     )
 
     trainer = SFTTrainer(
