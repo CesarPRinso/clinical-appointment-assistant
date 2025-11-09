@@ -152,7 +152,6 @@ def main():
         peft_config=peft_cfg,
         args=args,
         compute_metrics=compute_metrics,
-        callbacks=[EarlyStoppingCallback(early_stopping_patience=5)]
     )
 
     trainer.train()

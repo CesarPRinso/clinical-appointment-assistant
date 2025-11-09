@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/training/train_lora.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="482">
-              <caret line="160" column="24" selection-start-line="160" selection-start-column="24" selection-end-line="160" selection-end-column="24" />
+            <state relative-caret-position="392">
+              <caret line="154" selection-start-line="154" selection-end-line="154" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -79,7 +79,6 @@
       <find>DATA_PATH</find>
       <find>ds</find>
       <find>safe_parse</find>
-      <find>compute_metrics</find>
       <find>model</find>
       <find>tok</find>
       <find>OUT_DIR</find>
@@ -91,6 +90,7 @@
       <find>repo</find>
       <find>DataCollatorForCompletionOnlyLM</find>
       <find>TrainingArguments</find>
+      <find>compute_metrics</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -215,12 +215,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1762701950960</updated>
-      <workItem from="1762701953090" duration="13556000" />
+      <workItem from="1762701953090" duration="14099000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13556000" />
+    <option name="totallyTimeSpent" value="14099000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1360" height="738" extended-state="6" />
@@ -461,8 +461,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/training/train_lora.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="160" column="24" selection-start-line="160" selection-start-column="24" selection-end-line="160" selection-end-column="24" />
+        <state relative-caret-position="392">
+          <caret line="154" selection-start-line="154" selection-end-line="154" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
