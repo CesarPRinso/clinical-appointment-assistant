@@ -6,6 +6,7 @@ from transformers import (
 )
 from trl import SFTTrainer
 from peft import LoraConfig, prepare_model_for_kbit_training, get_peft_model
+from transformers.trainer_utils import IntervalStrategy
 
 BASE_MODEL = os.getenv("BASE_MODEL", "mistralai/Mistral-7B-Instruct-v0.2")
 DATA_PATH  = os.getenv("DATA_PATH", "/gcs/data/data.jsonl")
@@ -125,8 +126,10 @@ def main():
         learning_rate=float(os.getenv("LR", "2e-4")),
         bf16=True,
         logging_steps=50,
-        evaluation_strategy="steps",
+
+        evaluation_strategy=IntervalStrategy.STEPS,
         eval_steps=200,
+        save_strategy=IntervalStrategy.STEPS, 
         save_steps=200,
         save_total_limit=2,
         load_best_model_at_end=True,
@@ -135,8 +138,9 @@ def main():
         lr_scheduler_type="cosine",
         warmup_ratio=0.03,
         report_to="none",
-        predict_with_generate=True,  # <- ahora sí
-        generation_max_length=256,  # <- ahora sí
+
+        predict_with_generate=True,
+        generation_max_length=256,
     )
 
     trainer = SFTTrainer(
