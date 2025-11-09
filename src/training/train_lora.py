@@ -43,7 +43,7 @@ def main():
 
     model = AutoModelForCausalLM.from_pretrained(
         BASE_MODEL, quantization_config=bnb,
-        torch_dtype=torch.bfloat16, device_map="auto"
+        dtype=torch.bfloat16, device_map="auto"
     )
     model = prepare_model_for_kbit_training(model)
 
@@ -127,9 +127,9 @@ def main():
         bf16=True,
         logging_steps=50,
 
-        evaluation_strategy=IntervalStrategy.STEPS,
+        eval_strategy=IntervalStrategy.STEPS,
         eval_steps=200,
-        save_strategy=IntervalStrategy.STEPS, 
+        save_strategy=IntervalStrategy.STEPS,
         save_steps=200,
         save_total_limit=2,
         load_best_model_at_end=True,
