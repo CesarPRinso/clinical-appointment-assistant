@@ -138,7 +138,7 @@ def main():
         lr_scheduler_type="cosine",
         warmup_ratio=0.03,
         report_to="none",
-
+        dataset_text_field="text",
         predict_with_generate=True,
         generation_max_length=256,
     )
@@ -149,7 +149,6 @@ def main():
         train_dataset=train_ds,
         eval_dataset=eval_ds,
         data_collator=collator,
-        dataset_text_field="text",
         peft_config=peft_cfg,
         max_seq_length=1024,
         packing=False,
