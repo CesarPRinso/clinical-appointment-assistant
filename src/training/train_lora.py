@@ -2,9 +2,9 @@ import os, re, json, torch
 from datasets import load_dataset
 from transformers import (
     AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig,
-    TrainingArguments, EarlyStoppingCallback
+    TrainingArguments, EarlyStoppingCallback, DataCollatorForLanguageModeling
 )
-from trl import SFTTrainer, DataCollatorForCompletionOnlyLM
+from trl import SFTTrainer
 from peft import LoraConfig, prepare_model_for_kbit_training, get_peft_model
 
 BASE_MODEL = os.getenv("BASE_MODEL", "mistralai/Mistral-7B-Instruct-v0.2")
@@ -71,7 +71,7 @@ def main():
 
     # Collator que enmascara todo antes de ```json
     response_template_ids = tok.encode("```json", add_special_tokens=False)[1:]
-    collator = DataCollatorForCompletionOnlyLM(response_template_ids, tokenizer=tok)
+    collator = DataCollatorForLanguageModeling(tokenizer=tok, mlm=False)
 
     # --- Métricas ---
     TARGET_FIELDS = ["intent","service","date","time","name","dni"]

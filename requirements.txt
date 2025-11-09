@@ -12,3 +12,5 @@ accelerate
 bitsandbytes
 torch
 flask-cors
+torch
+torchvision

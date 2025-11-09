@@ -1,7 +1,8 @@
-PROJECT_ID=tu-proyecto
-REGION=europe-west4
-BUCKET=gs://tu-bucket
-IMAGE_URI=europe-west4-docker.pkg.dev/$PROJECT_ID/vertex/train-lora:latest
+PROJECT_ID=test-vertex-fau
+REGION=us-central1
+BUCKET="gs://${PROJECT_ID}-llm"
+IMAGE_TRAIN="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO}/train-lora:latest"
+IMAGE_SERVE="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO}/serve-flask:latest"
 
 # 1) Build & push image (Cloud Build o local con gcloud builds submit)
 gcloud builds submit --tag $IMAGE_URI .
