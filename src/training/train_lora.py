@@ -2,7 +2,7 @@ import os, re, json, torch
 from datasets import load_dataset
 from transformers import (
     AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig,
-    TrainingArguments, EarlyStoppingCallback, DataCollatorForLanguageModeling
+    Seq2SeqTrainingArguments, EarlyStoppingCallback, DataCollatorForLanguageModeling
 )
 from trl import SFTTrainer
 from peft import LoraConfig, prepare_model_for_kbit_training, get_peft_model
@@ -117,7 +117,7 @@ def main():
         return metrics
 
     # --- Args + Early Stopping ---
-    args = TrainingArguments(
+    args = Seq2SeqTrainingArguments(
         output_dir=OUT_DIR,
         num_train_epochs=int(os.getenv("EPOCHS", "3")),
         per_device_train_batch_size=2,
@@ -125,9 +125,8 @@ def main():
         learning_rate=float(os.getenv("LR", "2e-4")),
         bf16=True,
         logging_steps=50,
-        eval_strategy="steps",
+        evaluation_strategy="steps",
         eval_steps=200,
-        save_strategy="steps",  
         save_steps=200,
         save_total_limit=2,
         load_best_model_at_end=True,
@@ -136,8 +135,8 @@ def main():
         lr_scheduler_type="cosine",
         warmup_ratio=0.03,
         report_to="none",
-        predict_with_generate=True,
-        generation_max_length=256,
+        predict_with_generate=True,  # <- ahora sí
+        generation_max_length=256,  # <- ahora sí
     )
 
     trainer = SFTTrainer(
@@ -157,15 +156,13 @@ def main():
 
     trainer.train()
 
-    # Eval final explícita
     metrics = trainer.evaluate()
     print("📊 Eval:", metrics)
 
-    # Guardar adaptadores + tokenizer
     os.makedirs(OUT_DIR, exist_ok=True)
     model.save_pretrained(OUT_DIR)
     tok.save_pretrained(OUT_DIR)
-    print("✅ Adapters guardados en", OUT_DIR)
+    print("Adapters guardados en", OUT_DIR)
 
 if __name__ == "__main__":
     main()
