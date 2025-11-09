@@ -1,0 +1,14 @@
+flask
+python-dotenv
+pydantic
+jsonschema
+google-cloud-aiplatform
+gunicorn
+transformers>=4.44
+datasets
+peft>=0.11
+trl>=0.8
+accelerate
+bitsandbytes
+torch
+flask-cors

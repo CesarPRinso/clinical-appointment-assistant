@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LLMOutput",
+  "type": "object",
+  "required": [
+    "intent"
+  ],
+  "properties": {
+    "intent": {
+      "type": "string",
+      "enum": [
+        "book_appointment",
+        "ask_availability",
+        "ask_prices",
+        "cancel_or_change",
+        "faq_care",
+        "greetings"
+      ]
+    },
+    "service": {
+      "type": "string",
+      "enum": [
+        "limpieza",
+        "revision",
+        "blanqueamiento",
+        "carillas",
+        "ortodoncia_consulta"
+      ]
+    },
+    "date": {
+      "type": "string",
+      "description": "YYYY-MM-DD",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "time": {
+      "type": "string",
+      "description": "HH:mm (24h)",
+      "pattern": "^\\d{2}:\\d{2}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dni": {
+      "type": "string",
+      "minLength": 3
+    }
+  },
+  "additionalProperties": false
+}

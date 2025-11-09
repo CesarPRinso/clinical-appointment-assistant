@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "_comment": "Catálogo de servicios de la clínica",
+  "version": "1.0.0",
+  "currency": "EUR",
+  "business_rules": {
+    "timezone": "Europe/Berlin",
+    "default_buffer_min": 10
+  },
+  "services": [
+    {
+      "code": "limpieza",
+      "name": "Limpieza dental",
+      "aliases": ["limpieza", "higiene", "profilaxis"],
+      "base_price": 50,
+      "duration_min": 40,
+      "description": "Limpieza profesional y pulido.",
+      "constraints": {}
+    },
+    {
+      "code": "revision",
+      "name": "Revisión",
+      "aliases": ["revisión", "control", "chequeo"],
+      "base_price": 30,
+      "duration_min": 20,
+      "description": "Examen general y diagnóstico.",
+      "constraints": {}
+    },
+    {
+      "code": "blanqueamiento",
+      "name": "Blanqueamiento",
+      "aliases": ["blanqueamiento", "blanqueo"],
+      "base_price": 180,
+      "duration_min": 60,
+      "description": "Tratamiento de aclarado con luz.",
+      "constraints": {
+        "requires_prior_revision": true
+      }
+    },
+    {
+      "code": "carillas",
+      "name": "Carillas estéticas",
+      "aliases": ["carillas", "veneers"],
+      "base_price": 300,
+      "duration_min": 90,
+      "description": "Carillas de composite o porcelana.",
+      "constraints": {}
+    },
+    {
+      "code": "ortodoncia_consulta",
+      "name": "Consulta de ortodoncia",
+      "aliases": ["ortodoncia", "ortodoncia consulta", "brackets consulta", "invisalign consulta"],
+      "base_price": 40,
+      "duration_min": 45,
+      "description": "Valoración inicial y plan de tratamiento.",
+      "constraints": {}
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "_comment": "Catálogo de intenciones soportadas por el asistente",
+  "version": "1.0.0",
+  "intents": [
+    {
+      "code": "book_appointment",
+      "description": "Reservar una cita nueva",
+      "required_slots": ["service", "date", "time", "name"],
+      "optional_slots": ["dni"],
+      "examples": [
+        "Quiero una limpieza el 25 a las 5pm",
+        "Reservar blanqueamiento mañana por la tarde"
+      ],
+      "followups": [
+        "¿A nombre de quién registramos la cita?",
+        "¿Podrías confirmarme la hora exacta en formato HH:mm?"
+      ]
+    },
+    {
+      "code": "ask_availability",
+      "description": "Consultar huecos libres para una fecha/servicio",
+      "required_slots": [],
+      "optional_slots": ["service", "date"],
+      "examples": [
+        "¿Qué horarios tienes para carillas el viernes?",
+        "¿Hay disponibilidad el 3 de diciembre?"
+      ]
+    },
+    {
+      "code": "ask_prices",
+      "description": "Consultar precios de un servicio",
+      "required_slots": [],
+      "optional_slots": ["service"],
+      "examples": [
+        "¿Cuánto cuesta la limpieza?",
+        "Precio de blanqueamiento"
+      ]
+    },
+    {
+      "code": "cancel_or_change",
+      "description": "Cancelar o reprogramar una cita existente",
+      "required_slots": ["name"],
+      "optional_slots": ["date", "time", "dni"],
+      "examples": [
+        "Quiero cambiar mi cita del lunes",
+        "Cancela mi reserva de las 10 para Carla"
+      ]
+    },
+    {
+      "code": "faq_care",
+      "description": "Preguntas frecuentes y cuidados",
+      "required_slots": [],
+      "optional_slots": ["service"],
+      "examples": [
+        "¿Qué cuidados después del blanqueamiento?",
+        "¿Duele la limpieza?"
+      ]
+    },
+    {
+      "code": "greetings",
+      "description": "Saludo / conversación social mínima",
+      "required_slots": [],
+      "optional_slots": [],
+      "examples": ["Hola", "Buenas tardes"]
+    }
+  ]
+}
