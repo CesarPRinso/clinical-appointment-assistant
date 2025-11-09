@@ -2,7 +2,7 @@ import os, re, json, torch
 from datasets import load_dataset
 from transformers import (
     AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig,
-    Seq2SeqTrainingArguments, EarlyStoppingCallback, DataCollatorForLanguageModeling
+    TrainingArguments, EarlyStoppingCallback, DataCollatorForLanguageModeling
 )
 from trl import SFTTrainer
 from peft import LoraConfig, prepare_model_for_kbit_training, get_peft_model
@@ -118,7 +118,7 @@ def main():
         return metrics
 
     # --- Args + Early Stopping ---
-    args = Seq2SeqTrainingArguments(
+    args = TrainingArguments(
         output_dir=OUT_DIR,
         num_train_epochs=int(os.getenv("EPOCHS", "3")),
         per_device_train_batch_size=2,
@@ -126,7 +126,6 @@ def main():
         learning_rate=float(os.getenv("LR", "2e-4")),
         bf16=True,
         logging_steps=50,
-
         eval_strategy=IntervalStrategy.STEPS,
         eval_steps=200,
         save_strategy=IntervalStrategy.STEPS,
@@ -151,6 +150,7 @@ def main():
         data_collator=collator,
         peft_config=peft_cfg,
         args=args,
+        compute_metrics=compute_metrics,
     )
 
     trainer.train()
