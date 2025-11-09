@@ -119,14 +119,15 @@ def main():
     # --- Args + Early Stopping ---
     args = TrainingArguments(
         output_dir=OUT_DIR,
-        num_train_epochs=int(os.getenv("EPOCHS","3")),
+        num_train_epochs=int(os.getenv("EPOCHS", "3")),
         per_device_train_batch_size=2,
         gradient_accumulation_steps=16,
-        learning_rate=float(os.getenv("LR","2e-4")),
+        learning_rate=float(os.getenv("LR", "2e-4")),
         bf16=True,
         logging_steps=50,
-        evaluation_strategy="steps",
+        eval_strategy="steps",
         eval_steps=200,
+        save_strategy="steps",  
         save_steps=200,
         save_total_limit=2,
         load_best_model_at_end=True,
