@@ -167,16 +167,16 @@ def main():
 
     trainer = SFTTrainer(
         model=model,
+        tokenizer=tok,  # ✅ añade tokenizer
         train_dataset=train_ds,
         eval_dataset=eval_ds,
         data_collator=collator,
         peft_config=peft_cfg,
         args=args,
-        max_seq_length=256,  # 🔹 acorta el contexto
-        packing=True,  # 🔹 concatena ejemplos
-        compute_metrics=None,  # 🔹 sin métricas durante training
+        max_seq_length=256,
+        packing=False,  # ✅ quita packing (incompatible con este collator)
+        compute_metrics=None,
     )
-
     trainer.train()
 
     metrics = trainer.evaluate()
