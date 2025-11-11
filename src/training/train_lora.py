@@ -4,12 +4,17 @@ from transformers import (
     AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig,
     TrainingArguments, EarlyStoppingCallback, DataCollatorForLanguageModeling
 )
-from trl import SFTTrainer
+from trl import SFTTrainer, DataCollatorForCompletionOnlyLM
 from peft import LoraConfig, prepare_model_for_kbit_training, get_peft_model
 from transformers.trainer_utils import IntervalStrategy
+from pathlib import Path
+
+
+
+THIS_DIR  = Path(__file__).resolve().parent                  # .../src/training
 
 BASE_MODEL = os.getenv("BASE_MODEL", "mistralai/Mistral-7B-Instruct-v0.2")
-DATA_PATH  = os.getenv("DATA_PATH", "/gcs/data/data.jsonl")
+DATA_PATH = os.getenv("DATA_PATH", str(THIS_DIR / "data" / "data_sample.json"))
 OUT_DIR    = os.getenv("OUT_DIR",   "/gcs/artifacts/adapters")
 
 SYSTEM = (
@@ -47,6 +52,10 @@ def main():
     )
     model = prepare_model_for_kbit_training(model)
 
+    model.gradient_checkpointing_enable()
+    model.config.use_cache = False
+
+
     # --- LoRA ---
     peft_cfg = LoraConfig(
         r=int(os.getenv("LORA_R", "16")),
@@ -70,9 +79,18 @@ def main():
     ds = ds.train_test_split(test_size=0.10, seed=42)
     train_ds, eval_ds = ds["train"], ds["test"]
 
+    MAX_TRAIN = int(os.getenv("MAX_TRAIN", "2500"))
+    MAX_EVAL  = int(os.getenv("MAX_EVAL",  "250"))
+    train_ds = train_ds.select(range(min(len(train_ds), MAX_TRAIN)))
+    eval_ds  = eval_ds.select(range(min(len(eval_ds),  MAX_EVAL)))
+
+
     # Collator que enmascara todo antes de ```json
     response_template_ids = tok.encode("```json", add_special_tokens=False)[1:]
-    collator = DataCollatorForLanguageModeling(tokenizer=tok, mlm=False)
+    collator = DataCollatorForCompletionOnlyLM(
+        response_template_ids=response_template_ids,
+        tokenizer=tok
+    )
 
     # --- Métricas ---
     TARGET_FIELDS = ["intent","service","date","time","name","dni"]
@@ -118,24 +136,24 @@ def main():
         return metrics
 
     # --- Args + Early Stopping ---
+    # 🔹 Configuración optimizada para GPU Tesla P4 (~7.8GB)
     args = TrainingArguments(
         output_dir=OUT_DIR,
-        num_train_epochs=int(os.getenv("EPOCHS", "3")),
-        per_device_train_batch_size=2,
+        num_train_epochs=int(os.getenv("EPOCHS", "1")),   # empieza con 1 para probar
+        per_device_train_batch_size=1,
+        per_device_eval_batch_size=1,
         gradient_accumulation_steps=16,
-        learning_rate=float(os.getenv("LR", "2e-4")),
+        learning_rate=float(os.getenv("LR", "1e-4")),
         bf16=True,
         logging_steps=50,
-        eval_strategy=IntervalStrategy.STEPS,
-        eval_steps=200,
-        save_strategy=IntervalStrategy.STEPS,
-        save_steps=200,
+
+        eval_strategy=IntervalStrategy.NO,         # 🔹 sin evaluación intermedia
+        save_strategy=IntervalStrategy.EPOCH,      # 🔹 guarda solo al final
         save_total_limit=2,
-        load_best_model_at_end=True,
-        metric_for_best_model="eval_accuracy",
-        greater_is_better=True,
+
         lr_scheduler_type="cosine",
         warmup_ratio=0.03,
+        optim="paged_adamw_8bit",                  # 🔹 optimizador 8-bit
         report_to="none",
     )
 
@@ -147,7 +165,9 @@ def main():
         data_collator=collator,
         peft_config=peft_cfg,
         args=args,
-        compute_metrics=compute_metrics,
+        max_seq_length=256,  # 🔹 acorta el contexto
+        packing=True,  # 🔹 concatena ejemplos
+        compute_metrics=None,  # 🔹 sin métricas durante training
     )
 
     trainer.train()
