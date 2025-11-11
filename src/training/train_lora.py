@@ -47,9 +47,12 @@ def main():
     tok.padding_side = "right"
 
     model = AutoModelForCausalLM.from_pretrained(
-        BASE_MODEL, quantization_config=bnb,
-        dtype=torch.bfloat16, device_map="auto"
+        BASE_MODEL,
+        quantization_config=bnb,
+        torch_dtype=torch.bfloat16
     )
+
+    model.to("cuda")
     model = prepare_model_for_kbit_training(model)
 
     model.gradient_checkpointing_enable()
