@@ -4,7 +4,7 @@ from transformers import (
     AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig,
     TrainingArguments, EarlyStoppingCallback, DataCollatorForLanguageModeling
 )
-from trl import SFTTrainer, DataCollatorForCompletionOnlyLM
+from trl import SFTTrainer, DataCollatorForCompletionOnlyLM, SFTConfig
 from peft import LoraConfig, prepare_model_for_kbit_training, get_peft_model
 from transformers.trainer_utils import IntervalStrategy
 from pathlib import Path
@@ -183,7 +183,7 @@ def main():
         sft_config=sft_cfg,  # <-- quita warnings por deprecación
         compute_metrics=None,
     )
-    
+
     trainer.train()
 
     metrics = trainer.evaluate()

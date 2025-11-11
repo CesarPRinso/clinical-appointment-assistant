@@ -15,11 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/training/train_lora.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="185" column="4" selection-start-line="185" selection-start-column="4" selection-end-line="185" selection-end-column="4" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="90">
+              <caret line="6" column="70" selection-start-line="6" selection-start-column="70" selection-end-line="6" selection-end-column="70" />
             </state>
           </provider>
         </entry>
@@ -58,9 +55,9 @@
       <find>TrainingArguments</find>
       <find>RESPONSE_TEMPLATE</find>
       <find>BitsAndBytesConfig</find>
-      <find>DataCollatorForCompletionOnlyLM</find>
       <find>collator</find>
       <find>SFTTrainer</find>
+      <find>DataCollatorForCompletionOnlyLM</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -187,12 +184,12 @@
       <updated>1762701950960</updated>
       <workItem from="1762701953090" duration="16700000" />
       <workItem from="1762731586134" duration="59000" />
-      <workItem from="1762822947748" duration="7374000" />
+      <workItem from="1762822947748" duration="7518000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24133000" />
+    <option name="totallyTimeSpent" value="24277000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1360" height="738" extended-state="6" />
@@ -385,11 +382,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/training/train_lora.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="185" column="4" selection-start-line="185" selection-start-column="4" selection-end-line="185" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="90">
+          <caret line="6" column="70" selection-start-line="6" selection-start-column="70" selection-end-line="6" selection-end-column="70" />
         </state>
       </provider>
     </entry>
