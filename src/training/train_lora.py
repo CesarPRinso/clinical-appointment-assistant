@@ -14,7 +14,7 @@ from pathlib import Path
 THIS_DIR  = Path(__file__).resolve().parent                  # .../src/training
 
 BASE_MODEL = os.getenv("BASE_MODEL", "mistralai/Mistral-7B-Instruct-v0.2")
-DATA_PATH = os.getenv("DATA_PATH", str(THIS_DIR / "data" / "data_sample.json"))
+DATA_PATH = os.getenv("DATA_PATH", str(THIS_DIR / "data" / "data.sample.json"))
 OUT_DIR    = os.getenv("OUT_DIR",   "/gcs/artifacts/adapters")
 
 SYSTEM = (
