@@ -88,10 +88,11 @@ def main():
 
 
     # Collator que enmascara todo antes de ```json
-    response_template_ids = tok.encode("```json", add_special_tokens=False)[1:]
+    RESPONSE_TEMPLATE = "```json\n"
     collator = DataCollatorForCompletionOnlyLM(
-        response_template_ids=response_template_ids,
-        tokenizer=tok
+        response_template=RESPONSE_TEMPLATE,
+        tokenizer=tok,
+        mlm=False
     )
 
     # --- Métricas ---

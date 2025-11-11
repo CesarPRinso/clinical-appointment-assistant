@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/training/train_lora.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="62" lean-forward="true" selection-start-line="17" selection-start-column="62" selection-end-line="17" selection-end-column="62" />
+            <state relative-caret-position="242">
+              <caret line="95" column="5" selection-start-line="95" selection-start-column="5" selection-end-line="95" selection-end-column="5" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -57,6 +57,7 @@
       <find>per_device_train_batch_size</find>
       <find>TrainingArguments</find>
       <find>DataCollatorForCompletionOnlyLM</find>
+      <find>RESPONSE_TEMPLATE</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -183,12 +184,12 @@
       <updated>1762701950960</updated>
       <workItem from="1762701953090" duration="16700000" />
       <workItem from="1762731586134" duration="59000" />
-      <workItem from="1762822947748" duration="3784000" />
+      <workItem from="1762822947748" duration="4451000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20543000" />
+    <option name="totallyTimeSpent" value="21210000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1360" height="738" extended-state="6" />
@@ -381,8 +382,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/training/train_lora.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="62" lean-forward="true" selection-start-line="17" selection-start-column="62" selection-end-line="17" selection-end-column="62" />
+        <state relative-caret-position="242">
+          <caret line="95" column="5" selection-start-line="95" selection-start-column="5" selection-end-line="95" selection-end-column="5" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
