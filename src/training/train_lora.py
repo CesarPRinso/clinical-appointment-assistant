@@ -165,18 +165,25 @@ def main():
         report_to="none",
     )
 
+    sft_cfg = SFTConfig(
+        max_seq_length=256,  # puedes bajar a 192 si hay OOM
+        packing=False,  # incompatible con DataCollatorForCompletionOnlyLM
+    )
+
     trainer = SFTTrainer(
         model=model,
-        tokenizer=tok,  # ✅ añade tokenizer
+        tokenizer=tok,  # <-- añade tokenizer
+        args=args,
+        peft_config=peft_cfg,
+        data_collator=collator,
         train_dataset=train_ds,
         eval_dataset=eval_ds,
-        data_collator=collator,
-        peft_config=peft_cfg,
-        args=args,
-        max_seq_length=256,
-        packing=False,  # ✅ quita packing (incompatible con este collator)
+        dataset_text_field="text",  # <-- CLAVE para evitar el KeyError
+        formatting_func=None,  # (nos basamos en 'text', no en formateador)
+        sft_config=sft_cfg,  # <-- quita warnings por deprecación
         compute_metrics=None,
     )
+    
     trainer.train()
 
     metrics = trainer.evaluate()
