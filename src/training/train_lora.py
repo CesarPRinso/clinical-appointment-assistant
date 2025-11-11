@@ -167,7 +167,6 @@ def main():
 
     trainer = SFTTrainer(
         model=model,
-        processing_class=tok,
         train_dataset=train_ds,
         eval_dataset=eval_ds,
         data_collator=collator,
