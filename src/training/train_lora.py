@@ -39,9 +39,12 @@ def build_prompt(q: str, ctx: str, a: str) -> str:
 def main():
     # --- Modelo base 4-bit + tokenizer ---
     bnb = BitsAndBytesConfig(
-        load_in_4bit=True, bnb_4bit_use_double_quant=True,
-        bnb_4bit_quant_type="nf4", bnb_4bit_compute_dtype=torch.bfloat16
+        load_in_4bit=True,
+        bnb_4bit_use_double_quant=True,
+        bnb_4bit_quant_type="nf4",
+        bnb_4bit_compute_dtype=torch.float16,
     )
+
     tok = AutoTokenizer.from_pretrained(BASE_MODEL, use_fast=True)
     tok.pad_token_id = tok.eos_token_id
     tok.padding_side = "right"
@@ -49,7 +52,9 @@ def main():
     model = AutoModelForCausalLM.from_pretrained(
         BASE_MODEL,
         quantization_config=bnb,
-        torch_dtype=torch.bfloat16
+        device_map="auto",
+        max_memory={"cuda:0": "7GiB", "cpu": "32GiB"},
+        low_cpu_mem_usage=True
     )
 
     model = prepare_model_for_kbit_training(model)
@@ -145,11 +150,9 @@ def main():
         num_train_epochs=int(os.getenv("EPOCHS", "1")),   # empieza con 1 para probar
         per_device_train_batch_size=1,
         per_device_eval_batch_size=1,
-        gradient_accumulation_steps=16,
+        gradient_accumulation_steps=4,
         learning_rate=float(os.getenv("LR", "1e-4")),
-        bf16=True,
         logging_steps=50,
-
         eval_strategy=IntervalStrategy.NO,         # 🔹 sin evaluación intermedia
         save_strategy=IntervalStrategy.EPOCH,      # 🔹 guarda solo al final
         save_total_limit=2,
