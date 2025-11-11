@@ -53,8 +53,8 @@ def main():
         BASE_MODEL,
         quantization_config=bnb,
         device_map="auto",
-        max_memory={"cuda:0": "7GiB", "cpu": "32GiB"},
-        low_cpu_mem_usage=True
+        max_memory={0: "7GiB", "cpu": "32GiB"},
+        low_cpu_mem_usage=True,
     )
 
     model = prepare_model_for_kbit_training(model)
@@ -151,6 +151,8 @@ def main():
         per_device_train_batch_size=1,
         per_device_eval_batch_size=1,
         gradient_accumulation_steps=4,
+        fp16=True,
+        bf16=False,
         learning_rate=float(os.getenv("LR", "1e-4")),
         logging_steps=50,
         eval_strategy=IntervalStrategy.NO,         # 🔹 sin evaluación intermedia
